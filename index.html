@@ -13,7 +13,7 @@
     <link href="https://componentes.idee.es/api-idee/plugins/help/help.ol.min.css" rel="stylesheet" />
     <link href="https://componentes.idee.es/api-idee/plugins/vectorsmanagement/vectorsmanagement.ol.min.css"
         rel="stylesheet" />
-    <link href="https://componentes.idee.es/api-idee/plugins/printviewmanagement/printviewmanagement.ol.min.css" rel="stylesheet" />
+
 
     <style type="text/css">
         html,
@@ -41,7 +41,7 @@
             display: flex;
             justify-content: left;
             height: 80px;
-           / background-color: #364b5f;
+           /* background-color: #364b5f;
             /* Permite hacer clic a través de la imagen */
             pointer-events: none;
             /* Opcional: un poco de transparencia si se desea */
@@ -75,7 +75,6 @@
     <script type="text/javascript"
         src="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.js"></script>
     <script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/help/help.ol.min.js"></script>
-    <script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/printviewmanagement/printviewmanagement.ol.min.js"></script>
     <script type="text/javascript"
         src="https://componentes.idee.es/api-idee/plugins/vectorsmanagement/vectorsmanagement.ol.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/osmtogeojson/osmtogeojson.min.js"></script> -->
@@ -83,7 +82,7 @@
 
         const map = IDEE.map({
             container: 'mapjs',
-            controls: ['panzoom', 'scaleline', 'scale*true', 'rotate', 'location', 'backgroundlayers', 'getfeatureinfo'],
+            controls: ['panzoom', 'scale*true', 'scaleline', 'rotate', 'location', 'backgroundlayers', 'getfeatureinfo'],
             zoom: 9,
             maxZoom: 18,
             minZoom: 4,
@@ -452,11 +451,7 @@ content: '<div><h2 style="text-align:center;color:#fff;background-color:#364b5f;
         });
 
         map.addPlugin(mp2);
-        
-        const printviewmanagement = new IDEE.plugin.PrintViewManagement({
-             position: 'TL',
-        });
-        map.addPlugin(printviewmanagement);
+
     </script>
 </body>
 
