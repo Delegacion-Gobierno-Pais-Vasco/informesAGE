@@ -82,7 +82,7 @@
 
         const map = IDEE.map({
             container: 'mapjs',
-            controls: ['panzoom', 'scaleline', 'scale*true',  'rotate', 'location', 'backgroundlayers', 'getfeatureinfo'],
+            controls: ['panzoom', 'scale*true', 'scaleline', 'rotate', 'location', 'backgroundlayers', 'getfeatureinfo'],
             zoom: 9,
             maxZoom: 18,
             minZoom: 4,
@@ -96,7 +96,7 @@
         const organismoscuenca = new IDEE.layer.WMS({
             url: 'https://gis.miteco.gob.es/geoserver/agua/ows',
                         name: 'ambitos_oocc',
-            legend: 'Confederaciones Hidrograficas',
+            legend: 'Confederaciones Hidrograficas (Organismos de Cuenca)',
             isBase: false,
             format: 'image/png',
         }, {
@@ -166,13 +166,21 @@
         const DPMT = new IDEE.layer.WMS({
             url: 'https://gis.miteco.gob.es/geoserver/costas/dominio_publico_maritimo_terrestre/wms',
             name: 'dominio_publico_maritimo_terrestre',
-            legend: 'Costas (DPMT)',
+            legend: 'DPMT (Dominio Público Marítimo-Terrestre)',
             format: 'image/png',
             isBase: false,
         }, {
             tiled: false,
         });
-
+        const PTSLITORAL = new IDEE.layer.WMS({
+            url: 'https://www.geo.euskadi.eus/WMS_PLANGINTZA',
+            name: 'I_1_Antolamendu_Eremua_I_1_Ambito_de_Ordenacion',
+            legend: 'PTSLitoral_Gobierno Vasco (Ámbito de Ordenación_aprobación provisional))',
+            format: 'image/png',
+            isBase: false,
+        }, {
+            tiled: false,
+        });
         const SA = new IDEE.layer.WMS({
             url: 'https://plinur.transportes.gob.es/gis/ows?',
             name: 'sa_envolvente_total',
@@ -378,7 +386,8 @@
         map.addLayers([
             organismoscuenca,
             layerUA,
-            DPMT,
+            //DPMT,
+            //PTSLITORAL,
             //ffccRFIG, 
             //ZIDNEuskadi,  // Capa GeoJSON 
             //ZonasSeguridadEuskadi, // Capa GeoJSON
@@ -389,6 +398,12 @@
             //ffcctramificacion,
             //Buffer100FFCC                
         ]);
+
+        const Costas = new IDEE.layer.LayerGroup({
+            name: 'Costas',           // Nombre del grupo de capas
+            legend: 'Capas de Costas',  // Leyenda asociada al grupo
+            layers: [DPMT, PTSLITORAL],     // Capas que pertenecen al grupo
+        });
 
         const Defensa = new IDEE.layer.LayerGroup({
             name: 'Defensa',           // Nombre del grupo de capas
@@ -413,7 +428,7 @@
 
             layers: [Munexen, SAA, SA]     // Capas que pertenecen al grupo 
         });
-        map.addLayers([Defensa, Ferrocarriles, AviacionCivil, mascaraext]);
+        map.addLayers([Costas, Defensa, Ferrocarriles, AviacionCivil, mascaraext]);
 
         // Plugin Layerswitcher
         const layerswitcher = new IDEE.plugin.Layerswitcher({
